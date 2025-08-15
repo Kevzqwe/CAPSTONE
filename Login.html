@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page - Student</title>
+    <link rel="stylesheet" href="logincss.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <img src="PCSlogo.png" alt="School Logo" class="school-logo">
+            <h2>Online Document Request System</h2>
+            <p>Pateros Catholic School</p>
+        </div>
+
+        <div class="right-panel">
+            <div class="login-box">
+                
+                <h3>Login Your Account</h3>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Enter your email address" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="password">
+                        <input type="password" placeholder="Enter your password" id="password" class="Password" required>
+                        <img src="opeen.png" alt="Show" class="pass-opeen" id="togglePassword">
+                    </div>
+                </div>
+
+                <button class="login-btn">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="Loginscript.js"></script>
+    <script>
+        const loginButton = document.querySelector('.login-btn');
+        const emailInput = document.querySelector('input[type="email"]');
+        const passwordInput = document.getElementById('password');
+
+        // Login on button click
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = emailInput.value.trim().toLowerCase();
+            const password = passwordInput.value.trim().toLowerCase();
+
+            if (email === "student" && password === "student") {
+                window.location.href = "Student_Dashboard.html";
+            } else if (email === "admin" && password === "admin") {
+                window.location.href = "Admin.html";
+            } else {
+                alert("Invalid email or password.");
+            }
+        }
+
+        loginButton.addEventListener('click', handleLogin);
+
+        // Login on Enter key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Enter") {
+                handleLogin(event);
+            }
+        });
+    </script>
+</body>
+</html>

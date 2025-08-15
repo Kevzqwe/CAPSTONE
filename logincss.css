@@ -1,0 +1,172 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    flex-wrap: wrap;
+}
+
+.left-panel {
+    flex: 1;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    text-align: center;
+    min-width: 300px;
+}
+
+.school-logo {
+    width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.left-panel h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.left-panel p {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.right-panel {
+    flex: 1;
+    background-color: #fef9ef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding: 30px;
+    min-width: 300px;
+}
+
+.login-box {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 320px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.tabs span {
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-bottom: 3px solid transparent;
+}
+
+.active-tab {
+    border-bottom: 3px solid #3f4a8a;
+    color: #3f4a8a;
+}
+
+.inactive-tab {
+    color: #888;
+}
+
+h3 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.form-group input[type="email"],
+.Password {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.password {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.pass-opeen {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #3f4a8a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: #3f3f3f; /* Darker green on hover */
+}
+
+/* Click (active) effect */
+.login-btn:active {
+    background-color: #002fff; /* Even darker green when clicked */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .right-panel {
+        border-radius: 0;
+    }
+
+    .left-panel,
+    .right-panel {
+        min-width: 100%;
+    }
+
+    .login-box {
+        margin-top: 20px;
+    }
+}
