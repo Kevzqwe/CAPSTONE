@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pateros Catholic School - Dashboard</title>
+    <link rel="stylesheet" href="AdminDashboard.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="school-info">
+                <div class="logo">
+                    <img src="PCSlogo.png" alt="School Logo">
+                </div>
+                <h3>Pateros Catholic School</h3>
+            </div>
+            
+            <div class="admin-profile">
+                <div class="profile-img">
+                    <img src="Sample.png" alt="Administrator">
+                </div>
+                <h4>Administrator</h4>
+                <span class="role">Admin</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <button>
+                        <span>Dashboard</span>
+                    </button>
+                    <button>
+                        <span>Document Requests</span>
+                    </button>
+                    <button>
+                        <span>Account</span>
+                    </button>
+                </ul>
+            </nav>
+            
+            <button class="logout-btn">
+                Logout
+            </button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <nav class="breadcrumb"></nav>
+                <div class="search-container">
+                    <input type="text" placeholder="Search..." class="search-input">
+                    <img src="search-icon.png" alt="Search" class="search-icon">
+                </div>
+                <div class="header-icons">
+                    <img src="mail-icon.png" alt="Mail" class="header-icon">
+                    <img src="notification-icon.png" alt="Notifications" class="header-icon">
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="welcome-section">
+                    <h1>Dashboard</h1>
+                    <div class="welcome-text">
+                        <h2>Welcome, Admin!</h2>
+                        <p>April 18, 2025</p>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card pending">
+                        <div class="stat-icon">
+                            <img src="pending-icon.png" alt="Pending" class="stat-icon-img">
+                        </div>
+                        <div class="stat-info">
+                            <h3>2</h3>
+                            <p>Pending</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card ready">
+                        <div class="stat-icon">
+                            <img src="ready-icon.png" alt="Ready for pickup" class="stat-icon-img">
+                        </div>
+                        <div class="stat-info">
+                            <h3>1</h3>
+                            <p>Ready for pick-up</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card completed">
+                        <div class="stat-icon">
+                            <img src="completed-icon.png" alt="Completed" class="stat-icon-img">
+                        </div>
+                        <div class="stat-info">
+                            <h3>1</h3>
+                            <p>Completed</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Cards -->
+                <div class="bottom-cards">
+                    <div class="announcement-card">
+                        <h3>Announcement</h3>
+                        <div class="announcement-content">
+                            <div class="announcement-header">
+                                <input type="text" class="announcement-title" value="School Announcement: Holy Week Schedule & Online Document Requests" placeholder="Enter announcement title...">
+                            </div>
+                            <div class="announcement-body">
+                                <textarea class="announcement-text" placeholder="Enter announcement content...">Dear Students, Parents, and Faculty,
+
+In observance of Holy Week, our school will be temporarily suspending online document requests starting April 8, 2025 - April 20, 2025. Normal processing will resume after Holy Week on April 21, 2025.
+
+Please plan accordingly and submit any urgent requests before the suspension period. We appreciate your understanding and wish everyone a meaningful Holy Week.
+
+Thank you,
+Pateros Catholic School</textarea>
+                            </div>
+                            <div class="announcement-actions">
+                                <button class="btn-edit">
+                                    <img src="edit-icon.png" alt="Edit">
+                                    Edit
+                                </button>
+                                <button class="btn-publish">
+                                    <img src="publish-icon.png" alt="Publish">
+                                    Publish
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="transaction-card">
+                        <h3>Transaction Days</h3>
+                        <div class="transaction-content">
+                            <textarea class="transaction-text" placeholder="Enter transaction information...">Browse the internal list of our official transaction days are from Monday to Friday, 8:00 AM to 5:00 PM.
+
+No transactions will be processed on Saturdays and Sundays.
+
+Kindly ensure that all requests and inquiries are made within our official business hours. Thank you for your cooperation!</textarea>
+                            <div class="transaction-actions">
+                                <button class="btn-edit">
+                                    <img src="edit-icon.png" alt="Edit">
+                                    Edit
+                                </button>
+                                <button class="btn-publish">
+                                    <img src="publish-icon.png" alt="Publish">
+                                    Publish
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
