@@ -641,15 +641,63 @@ body {
 
 /* Document Requests Styles */
 .document-requests-section {
-    background: white;
+    background: #2A3663;
     border-radius: 12px;
-    overflow: hidden;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    width: 100%;
+    overflow-x: auto;
+    padding: 0; /* Remove extra padding that may cause white space */
+}
+
+/* Requests Table: Responsive */
+.requests-table {
+    width: 100%;
+    min-width: 1200px; /* Lowered for small screens */
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    table-layout: auto;
+    background: white; /* Ensure table background is solid */
+}
+
+/* Table cells */
+.requests-table th,
+.requests-table td {
+    padding: 0.6rem;
+    text-align: left;
+    white-space: nowrap;
+    font-size: 0.95rem;
+    background: white; /* Prevent half white effect */
+}
+
+/* Responsive adjustments for medium screens */
+@media (max-width: 900px) {
+    .requests-table {
+        min-width: 400px;
+        font-size: 0.9rem;
+    }
+    .requests-table th,
+    .requests-table td {
+        padding: 0.4rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 600px) {
+    .requests-table {
+        min-width: 300px;
+        font-size: 0.8rem;
+    }
+    .requests-table th,
+    .requests-table td {
+        padding: 0.2rem;
+        font-size: 0.8rem;
+    }
 }
 
 .section-header {
     background: #2A3663;
-    color: white;
+    color: #ffffff;
     padding: 1.5rem;
     display: flex;
     align-items: center;
@@ -679,6 +727,7 @@ body {
 
 .requests-table {
     width: 100%;
+    min-width: 900px; /* Ensures table doesn't break on small screens */
     border-collapse: collapse;
 }
 
@@ -744,104 +793,7 @@ body {
     min-width: 100px;
 }
 
- .page-section {
-            display: none;
-        }
-
-        .page-section.active {
-            display: block;
-        }
-
-        .document-requests-section {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .section-header {
-            background: #2A3663;
-            color: white;
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: between;
-            gap: 1rem;
-        }
-
-        .section-header h2 {
-            margin: 0;
-            font-size: 1.4rem;
-        }
-
-        .sort-button {
-            background: #ffa726;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            margin-left: auto;
-        }
-
-        .requests-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .requests-table th {
-            background: #f8f9fa;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-            color: #333;
-            border-bottom: 1px solid #dee2e6;
-            font-size: 0.9rem;
-        }
-
-        .requests-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #f1f3f4;
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        .requests-table tr:hover {
-            background: #f8f9fa;
-        }
-
-        .status-badge {
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .status-processing {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .btn-view {
-            background: #2A3663;
-            color: white;
-            border: none;
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            cursor: pointer;
-        }
-
-        .btn-view:hover {
-            background: #1e2a54;
-        }
-
-        .date-column {
-            min-width: 100px;
-        }
-
-        .date-picker {
+.date-picker {
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 0.4rem 0.6rem;
