@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SF10-ES - Learner Permanent Academic Record</title>
+  <link rel="stylesheet" href="f138.css">
+</head>
+<body>
+  <div class="form-container">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="logo-placeholder">
+        <img src="depseal.png" alt="School Logo" style="width:60px;height:60px;">
+      </div>
+      <div class="title-section">
+        <h2>Republic of the Philippines<br>Department of Education</h2>
+        <h1>Learner Permanent Academic Record for Elementary School (SF10-ES)</h1>
+        <label class="F137"> (Formerly Form 137)</label>
+      </div>
+      <div class="deped-logo">
+        <img src="depedlogo.png" alt="DepEd Logo">
+      </div>
+    </div>
+
+    <!-- LEARNER'S PERSONAL INFO -->
+    <div class="section">
+      <h3>LEARNER'S PERSONAL INFORMATION</h3>
+      <div class="form-row">
+        <label>LAST NAME <input type="text" class="form-control"></label>
+        <label>FIRST NAME <input type="text" class="form-control"></label>
+        <label>NAME EXT. (Jr/III) <input type="text" class="form-control"></label>
+        <label>MIDDLE NAME <input type="text" class="form-control"></label>
+      </div>
+      <div class="form-row">
+        <label>Learner Reference Number (LRN) <input type="text" class="form-control"></label>
+        <label>Birthdate (mm/dd/yyyy) <input type="text" class="form-control"></label>
+        <label>Sex <input type="text" class="form-control small-input"></label>
+      </div>
+    </div>
+
+    <!-- ELIGIBILITY -->
+    <div class="section">
+      <h3>ELIGIBILITY FOR ELEMENTARY SCHOOL ENROLLMENT</h3>
+      <div class="form-row check-row">
+        <label> Kinder Progress Report <input type="checkbox"></label>
+        <label> ECCD Checklist <input type="checkbox"></label>
+        <label> Kindergarten Certificate of Completion <input type="checkbox"></label>
+        <label> Other Credential Presented <input type="checkbox"></label>
+      </div>
+      <div class="form-row">
+        <label>Name of School <input type="text" class="form-control"></label>
+        <label>School ID <input type="text" class="form-control"></label>
+        <label>Address of School <input type="text" class="form-control"></label>
+      </div>
+    </div>
+
+    <!-- PEPT / ALS -->
+    <div class="section">
+      <h3>PEPT / ALS Information</h3>
+      <div class="form-row">
+        <label>PEPT Passer Rating <input type="text" class="form-control small-input"></label>
+        <label>Date of Examination <input type="text" class="form-control"></label>
+        <label>Others (Specify) <input type="text" class="form-control"></label>
+      </div>
+      <div class="form-row">
+        <label>Name & Address of Testing Center <input type="text" class="form-control"></label>
+        <label>Remarks <input type="text" class="form-control"></label>
+      </div>
+    </div>
+
+    <!-- SCHOLASTIC -->
+    <div class="section scholastic">
+      <h3>SCHOLASTIC RECORD</h3>
+    </div>
+
+    <div class="scholastic-sections">
+      <div class="section1">
+        <div class="year-header">
+          <div class="form-row">
+            <label>School <input type="text" class="form-control"></label>
+            <label>School ID <input type="text" class="form-control"></label>
+            <label>District <input type="text" class="form-control"></label>
+            <label>Division <input type="text" class="form-control"></label>
+            <label>Region <input type="text" class="form-control"></label>
+          </div>
+          <div class="form-row">
+            <label>Classified as Grade <input type="text" class="form-control"></label>
+            <label>Section <input type="text" class="form-control"></label>
+            <label>School Year <input type="text" class="form-control"></label>
+            <label>Adviser/Teacher <input type="text" class="form-control"></label>
+            <label>Signature <input type="text" class="form-control"></label>
+          </div>
+        </div>
+
+        <!-- Grades Table -->
+        <div class="grades-table">
+          <table>
+            <thead>
+              <tr>
+                <th rowspan="2">Learning Areas</th>
+                <th colspan="4">Quarterly Rating</th>
+                <th rowspan="2">Final Rating</th>
+                <th rowspan="2">Remarks</th>
+              </tr>
+              <tr><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Mother Tongue</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>Filipino</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>English</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>Mathematics</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>Science</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>Araling Panlipunan</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>EPP / TLE</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>MAPEH</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Music</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Arts</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Physical Education</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Health</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>Eduk. sa Pagpapakatao</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>*Arabic Language</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>*Islamic Values Education</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr class="general-average"><td>General Average</td><td colspan="6"></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Remedial -->
+        <div class="remedial-section">
+          <h4>Remedial Classes</h4>
+          <div class="form-row">
+            <label>Conducted from: <input type="text" class="form-control small-input"></label>
+            <label>to: <input type="text" class="form-control small-input"></label>
+          </div>
+          <table class="remedial-table">
+            <thead>
+              <tr>
+                <th>Learning Areas</th>
+                <th>Final Rating</th>
+                <th>Remedial Class Mark</th>
+                <th>Recomputed Final Grade</th>
+                <th>Remarks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="section2">
+            <div class="year-header">
+        <div class="form-row">
+          <label>School <input type="text" class="form-control"></label>
+          <label>School ID <input type="text" class="form-control"></label>
+          <label>District <input type="text" class="form-control"></label>
+          <label>Division <input type="text" class="form-control"></label>
+          <label>Region <input type="text" class="form-control"></label>
+        </div>
+        <div class="form-row">
+          <label>Classified as Grade <input type="text" class="form-control"></label>
+          <label>Section <input type="text" class="form-control"></label>
+          <label>School Year <input type="text" class="form-control"></label>
+          <label>Adviser/Teacher <input type="text" class="form-control"></label>
+          <label>Signature <input type="text" class="form-control"></label>
+        </div>
+      </div>
+
+      <!-- Grades Table -->
+      <div class="grades-table">
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="2">Learning Areas</th>
+              <th colspan="4">Quarterly Rating</th>
+              <th rowspan="2">Final Rating</th>
+              <th rowspan="2">Remarks</th>
+            </tr>
+            <tr><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mother Tongue</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Filipino</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>English</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Mathematics</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Science</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Araling Panlipunan</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>EPP / TLE</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>MAPEH</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Music</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Arts</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Physical Education</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Health</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Eduk. sa Pagpapakatao</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>*Arabic Language</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>*Islamic Values Education</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="general-average"><td>General Average</td><td colspan="6"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Remedial -->
+      <div class="remedial-section">
+        <h4>Remedial Classes</h4>
+        <div class="form-row">
+          <label>Conducted from: <input type="text" class="form-control small-input"></label>
+          <label>to: <input type="text" class="form-control small-input"></label>
+        </div>
+        <table class="remedial-table">
+          <thead>
+            <tr>
+              <th>Learning Areas</th>
+              <th>Final Rating</th>
+              <th>Remedial Class Mark</th>
+              <th>Recomputed Final Grade</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+        </div>
+            <div class = "section3">
+                    <div class="year-header">
+        <div class="form-row">
+          <label>School <input type="text" class="form-control"></label>
+          <label>School ID <input type="text" class="form-control"></label>
+          <label>District <input type="text" class="form-control"></label>
+          <label>Division <input type="text" class="form-control"></label>
+          <label>Region <input type="text" class="form-control"></label>
+        </div>
+        <div class="form-row">
+          <label>Classified as Grade <input type="text" class="form-control"></label>
+          <label>Section <input type="text" class="form-control"></label>
+          <label>School Year <input type="text" class="form-control"></label>
+          <label>Adviser/Teacher <input type="text" class="form-control"></label>
+          <label>Signature <input type="text" class="form-control"></label>
+        </div>
+      </div>
+
+      <!-- Grades Table -->
+      <div class="grades-table">
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="2">Learning Areas</th>
+              <th colspan="4">Quarterly Rating</th>
+              <th rowspan="2">Final Rating</th>
+              <th rowspan="2">Remarks</th>
+            </tr>
+            <tr><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mother Tongue</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Filipino</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>English</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Mathematics</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Science</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Araling Panlipunan</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>EPP / TLE</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>MAPEH</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Music</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Arts</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Physical Education</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Health</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Eduk. sa Pagpapakatao</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>*Arabic Language</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>*Islamic Values Education</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="general-average"><td>General Average</td><td colspan="6"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Remedial -->
+      <div class="remedial-section">
+        <h4>Remedial Classes</h4>
+        <div class="form-row">
+          <label>Conducted from: <input type="text" class="form-control small-input"></label>
+          <label>to: <input type="text" class="form-control small-input"></label>
+        </div>
+        <table class="remedial-table">
+          <thead>
+            <tr>
+              <th>Learning Areas</th>
+              <th>Final Rating</th>
+              <th>Remedial Class Mark</th>
+              <th>Recomputed Final Grade</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+            </div>
+                <div class = "section4">
+                        <div class="year-header">
+        <div class="form-row">
+          <label>School <input type="text" class="form-control"></label>
+          <label>School ID <input type="text" class="form-control"></label>
+          <label>District <input type="text" class="form-control"></label>
+          <label>Division <input type="text" class="form-control"></label>
+          <label>Region <input type="text" class="form-control"></label>
+        </div>
+        <div class="form-row">
+          <label>Classified as Grade <input type="text" class="form-control"></label>
+          <label>Section <input type="text" class="form-control"></label>
+          <label>School Year <input type="text" class="form-control"></label>
+          <label>Adviser/Teacher <input type="text" class="form-control"></label>
+          <label>Signature <input type="text" class="form-control"></label>
+        </div>
+      </div>
+
+      <!-- Grades Table -->
+      <div class="grades-table">
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="2">Learning Areas</th>
+              <th colspan="4">Quarterly Rating</th>
+              <th rowspan="2">Final Rating</th>
+              <th rowspan="2">Remarks</th>
+            </tr>
+            <tr><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mother Tongue</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Filipino</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>English</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Mathematics</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Science</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Araling Panlipunan</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>EPP / TLE</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>MAPEH</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Music</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Arts</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Physical Education</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="sub-subject"><td>&nbsp;&nbsp;&nbsp;Health</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Eduk. sa Pagpapakatao</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>*Arabic Language</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>*Islamic Values Education</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr class="general-average"><td>General Average</td><td colspan="6"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Remedial -->
+      <div class="remedial-section">
+        <h4>Remedial Classes</h4>
+        <div class="form-row">
+          <label>Conducted from: <input type="text" class="form-control small-input"></label>
+          <label>to: <input type="text" class="form-control small-input"></label>
+        </div>
+        <table class="remedial-table">
+          <thead>
+            <tr>
+              <th>Learning Areas</th>
+              <th>Final Rating</th>
+              <th>Remedial Class Mark</th>
+              <th>Recomputed Final Grade</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+        </div>
+  </div>
+</body>
+</html>

@@ -337,8 +337,8 @@ body {
 }
 
 .document-icon {
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
     background: #ffffff;
     border-radius: 50%;
     display: flex;
@@ -350,8 +350,8 @@ body {
 }
 
 .document-icon img {
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
     object-fit: contain;
     border-radius: 50%;
     display: block;
