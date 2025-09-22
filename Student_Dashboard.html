@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pateros Catholic School Document Request System</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link href="Student.css" rel="stylesheet">
 </head>
 <body>
@@ -21,18 +22,18 @@
         <div class="student-avatar">
           <img src="Sample.png" alt="Student Avatar">
         </div>
-        <div class="student-name"><span id="studentName"></span></div>
+        <div class="student-name"><span id="studentName">John Doe</span></div>
         <span class="student-badge">Student</span>
       </div>
 
       <ul class="nav-menu">
         <li class="nav-item">
-          <a href="#" class="nav-link active" data-page="dashboard">
+          <a href="#" class="nav-link" data-page="dashboard">
             <i class="fas fa-home"></i> Dashboard
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link" data-page="documents">
+          <a href="#" class="nav-link active" data-page="documents">
             <i class="fas fa-file-alt"></i> Documents
           </a>
         </li>
@@ -61,7 +62,7 @@
           <button class="action-btn menu-toggle" id="menuToggle">
             <i class="fas fa-bars"></i>
           </button>
-          <h1 class="header-title" id="pageTitle">Dashboard</h1>
+          <h1 class="header-title" id="pageTitle">Documents</h1>
         </div>
         <div class="header-actions">
           <button class="AI-btn" title="AI Assistant" id="aiAssistantBtn">
@@ -74,7 +75,7 @@
       </header>
 
       <!-- Dashboard Page -->
-      <div class="page active" id="dashboard">
+      <div class="page" id="dashboard">
         <div class="page-content">
           <div class="welcome-card">
             <div class="welcome-date" id="welcomeDate"></div>
@@ -95,14 +96,14 @@
             </div>
           </div>
 
-          <label class="request-btn" style="margin: 30px auto; display: flex;">
+          <button class="request-btn" style="margin: 30px auto; display: flex;">
             <i class="fas fa-paper-plane"></i> Send Feedback
-          </label>
+          </button>
         </div>
       </div>
 
       <!-- Documents Page -->
-      <div class="page" id="documents">
+      <div class="page active" id="documents">
         <div class="page-content">
           <h2 style="margin-bottom: 20px; color: #000000;">Available Documents</h2>
 
@@ -134,6 +135,10 @@
               <div class="document-title">Good Moral Certificate</div>
             </button>
           </div>
+
+          <button class="request-btn" id="openModalBtn">
+            <i class="fas fa-paper-plane"></i> Request Documents
+          </button>
         </div>
       </div>
 
@@ -202,63 +207,226 @@
     </main>
   </div>
 
-  <!-- Document Modals -->
-  <div id="modal-grades" class="modal-overlay" style="display:none;">
+  <!-- Document Request Modal -->
+  <div class="modal-overlay" id="documentModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Request Copy of Grades</h2>
-        <button class="close-modal">✖</button>
+        <h2>Document Request Form</h2>
+        <button class="close-modal" id="closeModalBtn">×</button>
       </div>
       <div class="form-content">
-        <!-- Empty modal content for Copy of Grades -->
-      </div>
-    </div>
-  </div>
+        <form id="documentRequestForm">
+          <!-- Student Information Section -->
+          <div class="form-section">
+            <h3>Student Information</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="studentNumber">Student Number*</label>
+                <input type="text" id="studentNumber" required>
+              </div>
+              <div class="form-group">
+                <label for="emailField">Email*</label>
+                <input type="email" id="emailField" required>
+              </div>
+              <div class="form-group">
+                <label for="contactNo">Contact No.*</label>
+                <input type="tel" id="contactNo" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="surname">Surname*</label>
+                <input type="text" id="surname" required>
+              </div>
+              <div class="form-group">
+                <label for="firstname">Firstname*</label>
+                <input type="text" id="firstname" required>
+              </div>
+              <div class="form-group">
+                <label for="middlename">Middlename</label>
+                <input type="text" id="middlename">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="gradeField">Grade*</label>
+                <input type="text" id="gradeField" required>
+              </div>
+              <div class="form-group">
+                <label for="section">Section*</label>
+                <input type="text" id="section" required>
+              </div>
+              <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date">
+              </div>
+            </div>
+          </div>
 
-  <div id="modal-diploma" class="modal-overlay" style="display:none;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Request Diploma</h2>
-        <button class="close-modal">✖</button>
-      </div>
-      <div class="form-content">
-        <!-- Empty modal content for Diploma -->
-      </div>
-    </div>
-  </div>
+          <!-- Documents Available Section -->
+          <div class="form-section">
+            <h3>Documents Available</h3>
+            <div class="documents-section">
+              <div class="document-item">
+                <div class="document-info">
+                  <input type="checkbox" class="document-checkbox" id="regForm" data-price="50">
+                  <label for="regForm" class="document-name">Registration Form</label>
+                </div>
+                <div class="document-price">₱ 50.00</div>
+                <div class="quantity-controls">
+                  <button type="button" class="quantity-btn" onclick="changeQuantity('regForm', -1)">−</button>
+                  <input type="number" class="quantity-input" id="regForm-qty" value="0" min="0" readonly>
+                  <button type="button" class="quantity-btn" onclick="changeQuantity('regForm', 1)">+</button>
+                </div>
+                <div class="dropdown-controls">
+                  <select id="regForm-assessment">
+                    <option>--Select--</option>
+                    <option>2024</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                  </select>
+                  <select id="regForm-semester">
+                    <option>--Select--</option>
+                    <option>1st Semester</option>
+                    <option>2nd Semester</option>
+                  </select>
+                </div>
+              </div>
 
-  <div id="modal-coe" class="modal-overlay" style="display:none;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Request Certificate of Enrollment</h2>
-        <button class="close-modal">✖</button>
-      </div>
-      <div class="form-content">
-        <!-- Empty modal content for Certificate of Enrollment -->
-      </div>
-    </div>
-  </div>
+              <div class="document-item">
+                <div class="document-info">
+                  <input type="checkbox" class="document-checkbox" id="cog" data-price="50">
+                  <label for="cog" class="document-name">Certificate of Grades</label>
+                </div>
+                <div class="document-price">₱ 50.00</div>
+                <div class="quantity-controls">
+                  <button type="button" class="quantity-btn" onclick="changeQuantity('cog', -1)">−</button>
+                  <input type="number" class="quantity-input" id="cog-qty" value="0" min="0" readonly>
+                  <button type="button" class="quantity-btn" onclick="changeQuantity('cog', 1)">+</button>
+                </div>
+                <div class="dropdown-controls">
+                  <select id="cog-assessment">
+                    <option>--Select--</option>
+                    <option>2024</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                  </select>
+                  <select id="cog-semester">
+                    <option>--Select--</option>
+                    <option>1st Semester</option>
+                    <option>2nd Semester</option>
+                  </select>
+                </div>
+              </div>
 
-  <div id="modal-form137" class="modal-overlay" style="display:none;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Request Form 137</h2>
-        <button class="close-modal">✖</button>
-      </div>
-      <div class="form-content">
-        <!-- Empty modal content for Form 137 -->
-      </div>
-    </div>
-  </div>
+              <div class="document-item">
+                <div class="document-info">
+                  <input type="checkbox" class="document-checkbox" id="coe" data-price="50">
+                  <label for="coe" class="document-name">Certificate of Enrollment</label>
+                </div>
+                <div class="document-price">₱ 50.00</div>
+                <div class="quantity-controls">
+                  <button type="button" class="quantity-btn" onclick="changeQuantity('coe', -1)">−</button>
+                  <input type="number" class="quantity-input" id="coe-qty" value="0" min="0" readonly>
+                  <button type="button" class="quantity-btn" onclick="changeQuantity('coe', 1)">+</button>
+                </div>
+                <div class="dropdown-controls">
+                  <select id="coe-assessment">
+                    <option>--Select--</option>
+                    <option>2024</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                  </select>
+                  <select id="coe-semester">
+                    <option>--Select--</option>
+                    <option>1st Semester</option>
+                    <option>2nd Semester</option>
+                  </select>
+                </div>
+              </div>
 
-  <div id="modal-moral" class="modal-overlay" style="display:none;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Request Good Moral Certificate</h2>
-        <button class="close-modal">✖</button>
-      </div>
-      <div class="form-content">
-        <!-- Empty modal content for Good Moral Certificate -->
+              <div class="document-item">
+                <div class="document-info">
+                  <input type="checkbox" class="document-checkbox" id="tor" data-price="200">
+                  <label for="tor" class="document-name">Transcript of Records</label>
+                </div>
+                <div class="document-price">₱ 200.00</div>
+                <div class="quantity-controls">
+                  <button type="button" class="quantity-btn" onclick="changeQuantity('tor', -1)">−</button>
+                  <input type="number" class="quantity-input" id="tor-qty" value="0" min="0" readonly>
+                  <button type="button" class="quantity-btn" onclick="changeQuantity('tor', 1)">+</button>
+                </div>
+                <div class="dropdown-controls">
+                  <select id="tor-assessment">
+                    <option>--Select--</option>
+                    <option>2024</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                  </select>
+                  <select id="tor-semester">
+                    <option>--Select--</option>
+                    <option>1st Semester</option>
+                    <option>2nd Semester</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="document-item">
+                <div class="document-info">
+                  <input type="checkbox" class="document-checkbox" id="gmc" data-price="150">
+                  <label for="gmc" class="document-name">Good Moral Certificate</label>
+                </div>
+                <div class="document-price">₱ 150.00</div>
+                <div class="quantity-controls">
+                  <button type="button" class="quantity-btn" onclick="changeQuantity('gmc', -1)">−</button>
+                  <input type="number" class="quantity-input" id="gmc-qty" value="0" min="0" readonly>
+                  <button type="button" class="quantity-btn" onclick="changeQuantity('gmc', 1)">+</button>
+                </div>
+                <div class="dropdown-controls">
+                  <select id="gmc-assessment">
+                    <option>--Select--</option>
+                    <option>2024</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                  </select>
+                  <select id="gmc-semester">
+                    <option>--Select--</option>
+                    <option>1st Semester</option>
+                    <option>2nd Semester</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="total-section">
+              <span>Total:</span>
+              <span id="totalAmount">₱ 0.00</span>
+            </div>
+          </div>
+
+          <!-- Payment Method Section -->
+          <div class="form-section">
+            <h3>Payment Method</h3>
+            <div class="payment-options">
+              <div class="payment-option">
+                <input type="radio" id="cash" name="payment" value="cash" required>
+                <label for="cash">Cash</label>
+              </div>
+              <div class="payment-option">
+                <input type="radio" id="gcash" name="payment" value="gcash">
+                <label for="gcash">
+                  <span style="color: #0066cc; font-weight: bold;">G</span>Cash
+                </label>
+              </div>
+              <div class="payment-option">
+                <input type="radio" id="maya" name="payment" value="maya">
+                <label for="maya" style="color: #00b4d8; font-weight: bold;">maya</label>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">Submit Request</button>
+        </form>
       </div>
     </div>
   </div>
