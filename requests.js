@@ -384,7 +384,7 @@ function setupNavigationHandlers() {
                 // Handle logout logic here
                 alert('Logged out successfully!');
                 // Redirect to login page
-                // window.location.href = 'login.html';
+                window.location.href = 'Login.html';
             }
         });
     }

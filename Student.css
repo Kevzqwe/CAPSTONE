@@ -1092,4 +1092,114 @@ body {
     .form-section h3 {
         font-size: 14px;
     }
+    
+}
+
+.notification-dropdown {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    width: 320px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 2000;
+    max-height: 400px;
+    overflow-y: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.notification-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.clear-all-btn {
+    background: transparent;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.clear-all-btn:hover {
+    color: #0056b3;
+}
+
+/* Notification List */
+.notification-list {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Individual Notification Item */
+.notification-item {
+    display: flex;
+    padding: 15px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.2s;
+}
+
+.notification-item:hover {
+    background: #f9f9f9;
+}
+
+.notification-item.unread {
+    background: #eaf4ff;
+}
+
+/* Icon */
+.notification-icon {
+    font-size: 24px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+/* Content */
+.notification-content h4 {
+    font-size: 15px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.notification-content p {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.notification-time {
+    font-size: 11px;
+    color: #999;
+}
+
+/* Footer */
+.notification-footer {
+    padding: 10px 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.notification-footer a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.notification-footer a:hover {
+    color: #0056b3;
 }
