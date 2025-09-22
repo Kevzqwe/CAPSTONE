@@ -121,7 +121,7 @@ body {
     transition: all 0.3s ease;
     cursor: pointer;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .nav-link:hover,
@@ -593,7 +593,7 @@ body {
 
 .document-item {
     display: flex;
-    align-items: center;
+    align-items: center;   /* vertical alignment */
     justify-content: space-between;
     padding: 15px 0;
     border-bottom: 1px solid #e0e0e0;
@@ -607,7 +607,7 @@ body {
 
 .document-info {
     display: flex;
-    align-items: center;
+    align-items: center;   /* vertical alignment of checkbox and label */
     gap: 10px;
     flex: 1;
     min-width: 200px;
@@ -629,7 +629,8 @@ body {
     font-weight: 600;
     color: #27ae60;
     min-width: 80px;
-    text-align: center;
+    width: 80px;          /* added from your snippet */
+    text-align: right;    /* updated for better alignment */
     font-size: 14px;
 }
 
