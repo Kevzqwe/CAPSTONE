@@ -589,3 +589,186 @@ if (typeof module !== 'undefined' && module.exports) {
         validatePhone
     };
 }
+
+function getRequestData(requestNumber) {
+    // Mock data - in real app, this would be an API call
+    const mockData = {
+        'REQ-777246': {
+            requestNumber: 'REQ-777246',
+            dateRequested: '9/23/2025',
+            status: 'pending',
+            paymentMethod: 'Cash',
+            studentInfo: {
+                studentNumber: '2024-12345',
+                firstName: 'John',
+                lastName: 'Doe',
+                middleName: 'Smith',
+                grade: 'Grade 12',
+                section: 'A',
+                email: 'john.doe@email.com',
+                contact: '+63 912 345 6789'
+            },
+            documents: [
+                {
+                    name: 'Certificate of Grades',
+                    quantity: 1,
+                    price: 50.00,
+                    subtotal: 50.00,
+                    assessment: '2024',
+                    semester: '1st Semester'
+                }
+            ],
+            total: 50.00,
+            timeline: [
+                {
+                    date: '2025-09-23 10:30 AM',
+                    title: 'Request Submitted',
+                    description: 'Your document request has been successfully submitted.',
+                    status: 'completed'
+                },
+                {
+                    date: '2025-09-23 11:15 AM',
+                    title: 'Payment Received',
+                    description: 'Payment has been confirmed and processed.',
+                    status: 'completed'
+                },
+                {
+                    date: '2025-09-23 02:00 PM',
+                    title: 'Processing',
+                    description: 'Your documents are currently being processed.',
+                    status: 'active'
+                },
+                {
+                    date: 'Pending',
+                    title: 'Ready for Pickup',
+                    description: 'Documents will be ready for pickup.',
+                    status: 'pending'
+                },
+                {
+                    date: 'Pending',
+                    title: 'Completed',
+                    description: 'Request completed successfully.',
+                    status: 'pending'
+                }
+            ]
+        },
+        'REQ-972694': {
+            requestNumber: 'REQ-972694',
+            dateRequested: '9/23/2025',
+            status: 'pending',
+            paymentMethod: 'Cash',
+            studentInfo: {
+                studentNumber: '2024-12345',
+                firstName: 'John',
+                lastName: 'Doe',
+                middleName: 'Smith',
+                grade: 'Grade 12',
+                section: 'A',
+                email: 'john.doe@email.com',
+                contact: '+63 912 345 6789'
+            },
+            documents: [
+                {
+                    name: 'Good Moral Certificate',
+                    quantity: 1,
+                    price: 150.00,
+                    subtotal: 150.00,
+                    assessment: '2024',
+                    semester: '1st Semester'
+                }
+            ],
+            total: 150.00,
+            timeline: [
+                {
+                    date: '2025-09-23 10:30 AM',
+                    title: 'Request Submitted',
+                    description: 'Your document request has been successfully submitted.',
+                    status: 'completed'
+                },
+                {
+                    date: '2025-09-23 11:15 AM',
+                    title: 'Payment Received',
+                    description: 'Payment has been confirmed and processed.',
+                    status: 'completed'
+                },
+                {
+                    date: '2025-09-23 02:00 PM',
+                    title: 'Processing',
+                    description: 'Your documents are currently being processed.',
+                    status: 'active'
+                },
+                {
+                    date: 'Pending',
+                    title: 'Ready for Pickup',
+                    description: 'Documents will be ready for pickup.',
+                    status: 'pending'
+                },
+                {
+                    date: 'Pending',
+                    title: 'Completed',
+                    description: 'Request completed successfully.',
+                    status: 'pending'
+                }
+            ]
+        },
+        'REQ-000477': {
+            requestNumber: 'REQ-000477',
+            dateRequested: '9/23/2025',
+            status: 'pending',
+            paymentMethod: 'Maya',
+            studentInfo: {
+                studentNumber: '2024-12345',
+                firstName: 'John',
+                lastName: 'Doe',
+                middleName: 'Smith',
+                grade: 'Grade 12',
+                section: 'A',
+                email: 'john.doe@email.com',
+                contact: '+63 912 345 6789'
+            },
+            documents: [
+                {
+                    name: 'Transcript of Records',
+                    quantity: 1,
+                    price: 200.00,
+                    subtotal: 200.00
+                }
+            ],
+            total: 200.00,
+            timeline: [
+                {
+                    date: '2025-09-23 09:15 AM',
+                    title: 'Request Submitted',
+                    description: 'Your document request has been successfully submitted.',
+                    status: 'completed'
+                },
+                {
+                    date: '2025-09-23 09:45 AM',
+                    title: 'Awaiting Payment',
+                    description: 'Please complete your Maya payment to proceed.',
+                    status: 'active'
+                },
+                {
+                    date: 'Pending',
+                    title: 'Processing',
+                    description: 'Your documents will be processed after payment.',
+                    status: 'pending'
+                },
+                {
+                    date: 'Pending',
+                    title: 'Ready for Pickup',
+                    description: 'Documents will be ready for pickup.',
+                    status: 'pending'
+                },
+                {
+                    date: 'Pending',
+                    title: 'Completed',
+                    description: 'Request completed successfully.',
+                    status: 'pending'
+                }
+            ]
+        }
+    };
+
+    return mockData[requestNumber] || null;
+}

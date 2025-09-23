@@ -171,6 +171,115 @@
         </div>
       </div>
 
+      <div class="modal-overlay" id="requestDetailsModal">
+  <div class="modal-content request-details-modal">
+    <div class="modal-header">
+      <h2>Request Details</h2>
+      <button class="close-modal" id="closeRequestDetailsBtn">×</button>
+    </div>
+    <div class="request-details-content">
+      <!-- Request Information Section -->
+      <div class="details-section">
+        <h3>Request Information</h3>
+        <div class="details-grid">
+          <div class="detail-item">
+            <label>Request Number:</label>
+            <span id="detailRequestNo">-</span>
+          </div>
+          <div class="detail-item">
+            <label>Date Requested:</label>
+            <span id="detailDateRequested">-</span>
+          </div>
+          <div class="detail-item">
+            <label>Status:</label>
+            <span id="detailStatus" class="status-badge">-</span>
+          </div>
+          <div class="detail-item">
+            <label>Payment Method:</label>
+            <span id="detailPaymentMethod">-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Student Information Section -->
+      <div class="details-section">
+        <h3>Student Information</h3>
+        <div class="details-grid">
+          <div class="detail-item">
+            <label>Student Number:</label>
+            <span id="detailStudentNumber">-</span>
+          </div>
+          <div class="detail-item">
+            <label>Full Name:</label>
+            <span id="detailFullName">-</span>
+          </div>
+          <div class="detail-item">
+            <label>Grade & Section:</label>
+            <span id="detailGradeSection">-</span>
+          </div>
+          <div class="detail-item">
+            <label>Email:</label>
+            <span id="detailEmail">-</span>
+          </div>
+          <div class="detail-item">
+            <label>Contact Number:</label>
+            <span id="detailContact">-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Requested Documents Section -->
+      <div class="details-section">
+        <h3>Requested Documents</h3>
+        <div class="documents-table-container">
+          <table class="documents-detail-table">
+            <thead>
+              <tr>
+                <th>Document</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="detailDocumentsTable">
+              <!-- Document rows will be inserted here -->
+            </tbody>
+          </table>
+        </div>
+        <div class="total-amount-section">
+          <div class="total-row">
+            <span class="total-label">Total Amount:</span>
+            <span class="total-value" id="detailTotalAmount">₱ 0.00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status Timeline Section -->
+      <div class="details-section">
+        <h3>Status Timeline</h3>
+        <div class="timeline" id="statusTimeline">
+          <!-- Timeline items will be inserted here -->
+        </div>
+      </div>
+
+      <!-- Actions Section -->
+      <div class="details-section">
+        <div class="request-actions">
+          <button class="action-button cancel-btn" id="cancelRequestBtn">
+            <i class="fas fa-times"></i> Cancel Request
+          </button>
+          <button class="action-button download-btn" id="downloadReceiptBtn">
+            <i class="fas fa-download"></i> Download Receipt
+          </button>
+          <button class="action-button contact-btn" id="contactSupportBtn">
+            <i class="fas fa-phone"></i> Contact Support
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
       <!-- Account Page -->
       <div class="page" id="account">
         <div class="page-content">

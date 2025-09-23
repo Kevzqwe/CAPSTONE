@@ -1203,3 +1203,347 @@ body {
 .notification-footer a:hover {
     color: #0056b3;
 }
+/* Request Details Modal Styles - Add to Student.css */
+
+.request-details-modal {
+    max-width: 800px;
+    max-height: 90vh;
+}
+
+.request-details-content {
+    padding: 25px;
+    max-height: calc(90vh - 140px);
+    overflow-y: auto;
+}
+
+.details-section {
+    margin-bottom: 30px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+}
+
+.details-section h3 {
+    color: #2A3663;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 8px;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.detail-item label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+.detail-item span {
+    color: #555;
+    font-size: 14px;
+    padding: 8px 10px;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+}
+
+.status-badge {
+    padding: 6px 12px !important;
+    border-radius: 15px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-align: center;
+    width: fit-content !important;
+}
+
+.status-badge.pending {
+    background: #fff3cd !important;
+    color: #856404 !important;
+    border: 1px solid #ffeaa7 !important;
+}
+
+.status-badge.processing {
+    background: #d1ecf1 !important;
+    color: #0c5460 !important;
+    border: 1px solid #b8daff !important;
+}
+
+.status-badge.ready {
+    background: #d4edda !important;
+    color: #155724 !important;
+    border: 1px solid #c3e6cb !important;
+}
+
+.status-badge.completed {
+    background: #e2e3e5 !important;
+    color: #383d41 !important;
+    border: 1px solid #d6d8db !important;
+}
+
+.documents-table-container {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.documents-detail-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.documents-detail-table th {
+    background: #2A3663;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.documents-detail-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 14px;
+}
+
+.documents-detail-table tr:last-child td {
+    border-bottom: none;
+}
+
+.documents-detail-table tr:hover {
+    background: #f8f9fa;
+}
+
+.total-amount-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #2A3663;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.total-label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 16px;
+}
+
+.total-value {
+    font-weight: 700;
+    color: #27ae60;
+    font-size: 18px;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 20px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e9ecef;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #2A3663;
+    background: white;
+}
+
+.timeline-item.active::before {
+    background: #2A3663;
+}
+
+.timeline-item.completed::before {
+    background: #27ae60;
+    border-color: #27ae60;
+}
+
+.timeline-date {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.timeline-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 3px;
+    font-size: 14px;
+}
+
+.timeline-description {
+    color: #666;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.request-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.action-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.cancel-btn {
+    background: #e74c3c;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+}
+
+.download-btn {
+    background: #3498db;
+    color: white;
+}
+
+.download-btn:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+.contact-btn {
+    background: #27ae60;
+    color: white;
+}
+
+.contact-btn:hover {
+    background: #229954;
+    transform: translateY(-2px);
+}
+
+.action-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Make request numbers clickable */
+.table td:first-child {
+    color: #3498db;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.table td:first-child:hover {
+    color: #2980b9;
+}
+
+/* Responsive Design for Request Details Modal */
+@media (max-width: 768px) {
+    .request-details-modal {
+        max-width: 95%;
+        margin: 20px;
+    }
+    
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .request-actions {
+        flex-direction: column;
+    }
+    
+    .action-button {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .documents-detail-table {
+        font-size: 12px;
+    }
+    
+    .documents-detail-table th,
+    .documents-detail-table td {
+        padding: 8px;
+    }
+    
+    .total-row {
+        padding: 12px 15px;
+    }
+    
+    .total-label, .total-value {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .request-details-content {
+        padding: 15px;
+    }
+    
+    .details-section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .details-section h3 {
+        font-size: 14px;
+    }
+    
+    .timeline-item {
+        padding-left: 25px;
+    }
+}

@@ -349,3 +349,36 @@ function submitFeedback(form) {
 // General UI Interactions
 function setupUIInteractions() {
 }
+
+function initializeDocumentRequestSystem() {
+    // Set today's date
+    const today = new Date().toISOString().split('T')[0];
+    const dateField = document.getElementById('date');
+    if (dateField) {
+        dateField.value = today;
+    }
+
+    // Modal functionality
+    setupModalHandlers();
+    
+    // Document selection handlers
+    setupDocumentHandlers();
+    
+    // Form submission
+    setupFormSubmission();
+    
+    // Navigation handlers
+    setupNavigationHandlers();
+    
+    // Chatbot functionality
+    setupChatbot();
+    
+    // Menu toggle for mobile
+    setupMobileMenu();
+    
+    // Initialize welcome message
+    initializeWelcomeMessage();
+    
+    // ADD THIS LINE:
+    initializeRequestDetailsModal();
+}
