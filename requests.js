@@ -1,258 +1,122 @@
-// Document Request System JavaScript
-// requests.js
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    initializeDocumentRequestSystem();
+document.addEventListener('DOMContentLoaded', () => {
+    initDocumentRequestSystem();
 });
 
-function initializeDocumentRequestSystem() {
-    // Set today's date
-    const today = new Date().toISOString().split('T')[0];
-    const dateField = document.getElementById('date');
-    if (dateField) {
-        dateField.value = today;
-    }
-
-    // Modal functionality
-    setupModalHandlers();
-    
-    // Document selection handlers
+function initDocumentRequestSystem() {
+    setTodayDate();
+    setupModal();
     setupDocumentHandlers();
-    
-    // Form submission
-    setupFormSubmission();
-    
-    // Navigation handlers
-    setupNavigationHandlers();
-    
-    // Chatbot functionality
-    setupChatbot();
-    
-    // Menu toggle for mobile
+    setupFormHandler();
+    setupNavigation();
     setupMobileMenu();
-    
-    // Initialize welcome message
-    initializeWelcomeMessage();
 }
 
-// Modal Handlers
-function setupModalHandlers() {
+/* ----------------- Utilities ----------------- */
+function setTodayDate() {
+    const today = new Date().toISOString().split('T')[0];
+    const dateField = document.getElementById('date');
+    if (dateField) dateField.value = today;
+}
+
+function resetForm() {
+    const form = document.getElementById('documentRequestForm');
+    if (form) form.reset();
+
+    document.querySelectorAll('.quantity-input').forEach(input => input.value = 0);
+    document.querySelectorAll('.document-checkbox').forEach(cb => cb.checked = false);
+    document.querySelectorAll('.dropdown-controls select').forEach(sel => sel.selectedIndex = 0);
+
+    const totalEl = document.getElementById('totalAmount');
+    if (totalEl) totalEl.textContent = '₱ 0.00';
+
+    setTodayDate();
+}
+
+/* ----------------- Modal ----------------- */
+function setupModal() {
     const modal = document.getElementById('documentModal');
     const openBtn = document.getElementById('openModalBtn');
     const closeBtn = document.getElementById('closeModalBtn');
-
     if (!modal || !openBtn || !closeBtn) return;
 
-    // Open modal
-    openBtn.addEventListener('click', function() {
-        modal.classList.add('active');
-        modal.style.display = 'flex';
-    });
-
-    // Close modal
-    closeBtn.addEventListener('click', function() {
-        closeModal();
-    });
-
-    // Close modal when clicking outside
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-            closeModal();
-        }
-    });
-
-    // Handle existing document card modals
-    setupExistingModals();
+    openBtn.addEventListener('click', () => modal.style.display = 'flex');
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 }
 
 function closeModal() {
     const modal = document.getElementById('documentModal');
     if (!modal) return;
-    
-    modal.classList.remove('active');
-    setTimeout(() => {
-        modal.style.display = 'none';
-        resetForm();
-    }, 300);
+    modal.style.display = 'none';
+    resetForm();
 }
 
-function resetForm() {
-    const form = document.getElementById('documentRequestForm');
-    if (form) {
-        form.reset();
-    }
-    
-    // Reset all quantities to 0
-    document.querySelectorAll('.quantity-input').forEach(input => {
-        input.value = 0;
-    });
-    
-    // Uncheck all checkboxes
-    document.querySelectorAll('.document-checkbox').forEach(checkbox => {
-        checkbox.checked = false;
-    });
-    
-    // Reset dropdowns
-    document.querySelectorAll('.dropdown-controls select').forEach(select => {
-        select.selectedIndex = 0;
-    });
-    
-    // Reset total
-    const totalElement = document.getElementById('totalAmount');
-    if (totalElement) {
-        totalElement.textContent = '₱ 0.00';
-    }
-    
-    // Set today's date again
-    const today = new Date().toISOString().split('T')[0];
-    const dateField = document.getElementById('date');
-    if (dateField) {
-        dateField.value = today;
-    }
-}
-
-// Handle existing modal system
-function setupExistingModals() {
-    // Handle existing document cards that open individual modals
-    document.querySelectorAll('.document-card[data-modal]').forEach(card => {
-        card.addEventListener('click', function() {
-            const modalId = this.getAttribute('data-modal');
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.style.display = 'flex';
-            }
-        });
-    });
-
-    // Handle existing modal close buttons
-    document.querySelectorAll('.close-modal').forEach(closeBtn => {
-        closeBtn.addEventListener('click', function() {
-            const modal = this.closest('.modal-overlay');
-            if (modal) {
-                modal.style.display = 'none';
-            }
-        });
-    });
-
-    // Close existing modals when clicking outside
-    document.querySelectorAll('.modal-overlay').forEach(modal => {
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-    });
-}
-
-// Document Selection Handlers
+/* ----------------- Document Selection ----------------- */
 function setupDocumentHandlers() {
-    // Checkbox change handlers
-    document.querySelectorAll('.document-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            const docId = this.id;
-            const qtyInput = document.getElementById(docId + '-qty');
-            
-            if (this.checked && parseInt(qtyInput.value) === 0) {
-                qtyInput.value = 1;
-            } else if (!this.checked) {
-                qtyInput.value = 0;
-            }
-            
+    document.querySelectorAll('.document-checkbox').forEach(cb => {
+        cb.addEventListener('change', () => {
+            const qty = document.getElementById(cb.id + '-qty');
+            if (!qty) return;
+            qty.value = cb.checked ? Math.max(1, parseInt(qty.value || 0)) : 0;
             updateTotal();
         });
     });
 
-    // Make quantity change function global
-    window.changeQuantity = function(documentId, change) {
-        const qtyInput = document.getElementById(documentId + '-qty');
-        const checkbox = document.getElementById(documentId);
-        
-        if (!qtyInput || !checkbox) return;
-        
-        let currentQty = parseInt(qtyInput.value) || 0;
-        let newQty = Math.max(0, currentQty + change);
-        
-        qtyInput.value = newQty;
-        checkbox.checked = newQty > 0;
-        
+    window.changeQuantity = (id, change) => {
+        const qty = document.getElementById(id + '-qty');
+        const cb = document.getElementById(id);
+        if (!qty || !cb) return;
+
+        let newQty = Math.max(0, parseInt(qty.value || 0) + change);
+        qty.value = newQty;
+        cb.checked = newQty > 0;
         updateTotal();
     };
 }
 
-// Update total calculation
 function updateTotal() {
     let total = 0;
-    
-    document.querySelectorAll('.document-checkbox').forEach(checkbox => {
-        if (checkbox.checked) {
-            const price = parseFloat(checkbox.dataset.price) || 0;
-            const qtyInput = document.getElementById(checkbox.id + '-qty');
-            const quantity = parseInt(qtyInput.value) || 0;
-            total += price * quantity;
-        }
+    document.querySelectorAll('.document-checkbox:checked').forEach(cb => {
+        const qty = parseInt(document.getElementById(cb.id + '-qty')?.value || 0);
+        const price = parseFloat(cb.dataset.price || 0);
+        total += qty * price;
     });
-    
-    const totalElement = document.getElementById('totalAmount');
-    if (totalElement) {
-        totalElement.textContent = '₱ ' + total.toFixed(2);
-    }
+    const totalEl = document.getElementById('totalAmount');
+    if (totalEl) totalEl.textContent = '₱ ' + total.toFixed(2);
 }
 
-// Form Submission
-function setupFormSubmission() {
+/* ----------------- Form Handling ----------------- */
+function setupFormHandler() {
     const form = document.getElementById('documentRequestForm');
     if (!form) return;
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async e => {
         e.preventDefault();
-        
-        // Validate form
-        if (!validateForm()) {
-            return;
-        }
-        
-        // Collect form data
+        if (!validateForm()) return;
+
         const formData = collectFormData();
-        
-        // Process form submission
-        processFormSubmission(formData);
+        await submitForm(formData);
     });
 }
 
 function validateForm() {
-    // Check if at least one document is selected
-    const selectedDocs = document.querySelectorAll('.document-checkbox:checked');
-    if (selectedDocs.length === 0) {
+    if (!document.querySelector('.document-checkbox:checked')) {
         alert('Please select at least one document.');
         return false;
     }
 
-    // Check required fields
-    const requiredFields = [
-        'studentNumber', 'emailField', 'contactNo', 
-        'surname', 'firstname', 'gradeField', 'section'
-    ];
-
-    for (let fieldId of requiredFields) {
-        const field = document.getElementById(fieldId);
-        if (!field || !field.value.trim()) {
+    const required = ['studentNumber', 'emailField', 'contactNo', 'surname', 'firstname', 'gradeField', 'section'];
+    for (let id of required) {
+        const el = document.getElementById(id);
+        if (!el || !el.value.trim()) {
             alert('Please fill in all required fields.');
-            field?.focus();
+            el?.focus();
             return false;
         }
     }
 
-    // Check if payment method is selected
-    const paymentMethod = document.querySelector('input[name="payment"]:checked');
-    if (!paymentMethod) {
+    if (!document.querySelector('input[name="payment"]:checked')) {
         alert('Please select a payment method.');
         return false;
     }
@@ -261,331 +125,164 @@ function validateForm() {
 }
 
 function collectFormData() {
-    // Student information
-    const studentInfo = {
-        studentNumber: document.getElementById('studentNumber')?.value || '',
-        email: document.getElementById('emailField')?.value || '',
-        contactNo: document.getElementById('contactNo')?.value || '',
-        surname: document.getElementById('surname')?.value || '',
-        firstname: document.getElementById('firstname')?.value || '',
-        middlename: document.getElementById('middlename')?.value || '',
-        grade: document.getElementById('gradeField')?.value || '',
-        section: document.getElementById('section')?.value || '',
-        date: document.getElementById('date')?.value || ''
+    // Collect student info - fix field mapping
+    const student = {};
+    const fieldMapping = {
+        'studentNumber': 'studentNumber',
+        'emailField': 'email',        // Map emailField to email
+        'contactNo': 'contactNo',
+        'surname': 'surname',
+        'firstname': 'firstname',
+        'middlename': 'middlename',
+        'gradeField': 'grade',        // Map gradeField to grade
+        'section': 'section',
+        'date': 'date'
     };
 
-    // Selected documents
+    Object.entries(fieldMapping).forEach(([elementId, dbField]) => {
+        const el = document.getElementById(elementId);
+        student[dbField] = el?.value || '';
+    });
+
+    // Collect selected documents - ensure we use data-id attribute
     const selectedDocs = [];
-    document.querySelectorAll('.document-checkbox:checked').forEach(checkbox => {
-        const docId = checkbox.id;
-        const qtyInput = document.getElementById(docId + '-qty');
-        const assessmentSelect = document.getElementById(docId + '-assessment');
-        const semesterSelect = document.getElementById(docId + '-semester');
+    document.querySelectorAll('.document-checkbox:checked').forEach(cb => {
+        const documentId = cb.dataset.id; // Use data-id attribute
+        const quantity = parseInt(document.getElementById(cb.id + '-qty')?.value || 0);
         
+        if (!documentId) {
+            console.error('Missing data-id for checkbox:', cb.id);
+            return;
+        }
+
         selectedDocs.push({
-            id: docId,
-            document: checkbox.nextElementSibling?.textContent || '',
-            quantity: parseInt(qtyInput?.value) || 0,
-            price: parseFloat(checkbox.dataset.price) || 0,
-            assessment: assessmentSelect?.value || '',
-            semester: semesterSelect?.value || ''
+            id: parseInt(documentId), // Ensure it's a number
+            document: cb.nextElementSibling?.textContent || '',
+            quantity: quantity,
+            price: parseFloat(cb.dataset.price || 0),
+            assessment: document.getElementById(cb.id + '-assessment')?.value || '',
+            semester: document.getElementById(cb.id + '-semester')?.value || ''
         });
     });
 
-    // Payment method
-    const paymentMethod = document.querySelector('input[name="payment"]:checked')?.value || '';
+    const payment = document.querySelector('input[name="payment"]:checked')?.value || '';
+    const total = selectedDocs.reduce((sum, d) => sum + d.price * d.quantity, 0);
 
-    // Calculate total
-    const total = selectedDocs.reduce((sum, doc) => sum + (doc.price * doc.quantity), 0);
-
-    return {
-        studentInfo,
-        selectedDocs,
-        paymentMethod,
-        total,
+    const formData = {
+        studentInfo: student,
+        selectedDocs: selectedDocs,
+        paymentMethod: payment,
+        total: total,
         submissionDate: new Date().toISOString()
     };
+
+    console.log('Collected form data:', JSON.stringify(formData, null, 2));
+    return formData;
 }
 
-function processFormSubmission(formData) {
-    // Show loading state
-    const submitBtn = document.querySelector('.submit-btn');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Submitting...';
-    submitBtn.disabled = true;
-
-    // Simulate API call (replace with actual API endpoint)
-    setTimeout(() => {
-        // Here you would normally send the data to your server
-        console.log('Form Data:', formData);
-        
-        // Generate request number (in real app, this would come from server)
-        const requestNumber = 'REQ-' + Date.now().toString().slice(-6);
-        
-        // Show success message
-        alert(`Request submitted successfully!\nRequest Number: ${requestNumber}\n\nYou will receive a confirmation email shortly.`);
-        
-        // Reset form and close modal
-        closeModal();
-        
-        // Add to request history (in real app, this would be handled by backend)
-        addToRequestHistory(formData, requestNumber);
-        
-        // Reset button
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-        
-    }, 2000); // Simulate network delay
-}
-
-function addToRequestHistory(formData, requestNumber) {
-    // This is a simple demo - in a real app, this would be handled by the backend
-    const historyTable = document.querySelector('#request-history .table tbody');
-    if (!historyTable) return;
-
-    const row = document.createElement('tr');
-    const documentsStr = formData.selectedDocs.map(doc => doc.document).join(', ');
-    const dateStr = new Date().toLocaleDateString();
+async function submitForm(data) {
+    const btn = document.querySelector('.submit-btn');
+    if (!btn) return;
     
-    row.innerHTML = `
-        <td>${requestNumber}</td>
-        <td>${documentsStr}</td>
-        <td>${formData.paymentMethod.charAt(0).toUpperCase() + formData.paymentMethod.slice(1)}</td>
-        <td>${dateStr}</td>
-        <td><span class="status-pending">Pending</span></td>
-    `;
-    
-    historyTable.appendChild(row);
-}
+    const orig = btn.textContent;
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
 
-// Navigation Handlers
-function setupNavigationHandlers() {
-    // Page navigation
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetPage = this.getAttribute('data-page');
-            if (targetPage) {
-                showPage(targetPage);
-            }
-            
-            // Update active nav link
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
-
-    // Logout handler
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-            if (confirm('Are you sure you want to logout?')) {
-                // Handle logout logic here
-                alert('Logged out successfully!');
-                // Redirect to login page
-                window.location.href = 'Login.html';
-            }
-        });
-    }
-}
-
-function showPage(pageId) {
-    // Hide all pages
-    document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-    });
-    
-    // Show target page
-    const targetPage = document.getElementById(pageId);
-    if (targetPage) {
-        targetPage.classList.add('active');
-    }
-    
-    // Update page title
-    const pageTitle = document.getElementById('pageTitle');
-    if (pageTitle) {
-        const titles = {
-            'dashboard': 'Dashboard',
-            'documents': 'Documents',
-            'request-history': 'Request History',
-            'account': 'Account'
-        };
-        pageTitle.textContent = titles[pageId] || 'Dashboard';
-    }
-}
-
-// Mobile Menu Handler
-function setupMobileMenu() {
-    const menuToggle = document.getElementById('menuToggle');
-    const sidebar = document.getElementById('sidebar');
-    
-    if (menuToggle && sidebar) {
-        menuToggle.addEventListener('click', function() {
-            sidebar.classList.toggle('mobile-open');
-        });
+    try {
+        console.log('Submitting data:', JSON.stringify(data, null, 2));
         
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768 && 
-                !sidebar.contains(e.target) && 
-                !menuToggle.contains(e.target)) {
-                sidebar.classList.remove('mobile-open');
-            }
+        const res = await fetch('document_request.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Cache-Control': 'no-cache'
+            },
+            body: JSON.stringify(data)
         });
-    }
-}
 
-// Chatbot Functionality
-function setupChatbot() {
-    const aiBtn = document.getElementById('aiAssistantBtn');
-    const chatbox = document.getElementById('chatbox');
-    const closeChat = document.getElementById('closeChat');
-    const sendChat = document.getElementById('sendChat');
-    const chatInput = document.getElementById('chatInput');
-    const chatBody = document.getElementById('chatBody');
-
-    if (aiBtn && chatbox) {
-        aiBtn.addEventListener('click', function() {
-            chatbox.style.display = chatbox.style.display === 'none' ? 'flex' : 'none';
-        });
-    }
-
-    if (closeChat && chatbox) {
-        closeChat.addEventListener('click', function() {
-            chatbox.style.display = 'none';
-        });
-    }
-
-    // FAQ button handlers
-    document.querySelectorAll('.faq-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const question = this.getAttribute('data-faq');
-            const answer = getFAQAnswer(question);
-            displayChatMessage('PCSbot', answer);
-        });
-    });
-
-    // Send chat message
-    if (sendChat && chatInput) {
-        sendChat.addEventListener('click', sendChatMessage);
-        chatInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendChatMessage();
-            }
-        });
-    }
-
-    function sendChatMessage() {
-        const message = chatInput.value.trim();
-        if (!message) return;
-
-        displayChatMessage('You', message);
-        chatInput.value = '';
-
-        // Simulate bot response
-        setTimeout(() => {
-            const response = getBotResponse(message);
-            displayChatMessage('PCSbot', response);
-        }, 1000);
-    }
-
-    function displayChatMessage(sender, message) {
-        const messageDiv = document.createElement('div');
-        messageDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
-        messageDiv.style.marginBottom = '10px';
-        messageDiv.style.padding = '8px';
-        messageDiv.style.backgroundColor = sender === 'You' ? '#e3f2fd' : '#f5f5f5';
-        messageDiv.style.borderRadius = '5px';
+        console.log('Response status:', res.status);
+        console.log('Response ok:', res.ok);
         
-        if (chatBody) {
-            chatBody.appendChild(messageDiv);
-            chatBody.scrollTop = chatBody.scrollHeight;
+        if (!res.ok) {
+            throw new Error(`HTTP ${res.status}: ${res.statusText}`);
         }
-    }
 
-    function getFAQAnswer(question) {
-        const answers = {
-            'How do I request a document?': 'To request a document, click on "Request Documents" button, fill out the form with your information, select the documents you need, choose your payment method, and submit.',
-            'How long does it take to process a request?': 'Document processing typically takes 3-5 business days. You will receive an email notification when your documents are ready for pickup.',
-            'What payment methods are accepted?': 'We accept Cash, GCash, and Maya payments. You can select your preferred payment method when submitting your request.',
-            'Can I cancel my request?': 'You can cancel your request within 24 hours of submission by contacting the registrar\'s office or through your request history.',
-            'Who do I contact for help?': 'For assistance, you can contact the Registrar\'s Office at registrar@paterscatholic.edu.ph or visit the office during business hours.'
-        };
-        return answers[question] || 'I\'m not sure about that. Please contact the registrar\'s office for more information.';
-    }
+        const text = await res.text();
+        console.log('Raw server response:', text);
+        console.log('Response length:', text.length);
 
-    function getBotResponse(message) {
-        const lowerMessage = message.toLowerCase();
-        
-        if (lowerMessage.includes('request') || lowerMessage.includes('document')) {
-            return 'To request documents, use the "Request Documents" button on the Documents page. Select the documents you need and fill out the required information.';
-        } else if (lowerMessage.includes('payment')) {
-            return 'We accept Cash, GCash, and Maya payments. You can choose your payment method when submitting your request.';
-        } else if (lowerMessage.includes('time') || lowerMessage.includes('long')) {
-            return 'Document processing typically takes 3-5 business days. You\'ll receive an email when ready.';
-        } else if (lowerMessage.includes('help') || lowerMessage.includes('contact')) {
-            return 'You can contact the Registrar\'s Office at registrar@paterscatholic.edu.ph or visit during business hours.';
+        if (!text || text.trim().length === 0) {
+            throw new Error('Server returned empty response');
+        }
+
+        // Check if it looks like JSON
+        const trimmed = text.trim();
+        if (!trimmed.startsWith('{') && !trimmed.startsWith('[')) {
+            throw new Error('Server returned non-JSON response: ' + trimmed.substring(0, 200));
+        }
+
+        let json;
+        try {
+            json = JSON.parse(text);
+        } catch (parseError) {
+            console.error('JSON parse error:', parseError);
+            console.error('Failed to parse:', text);
+            throw new Error('Invalid JSON response from server');
+        }
+
+        console.log('Parsed response:', json);
+
+        if (json.success) {
+            // FIXED: Safely handle grand_total with proper number conversion
+            const grandTotal = parseFloat(json.grand_total) || 0;
+            const totalDisplay = json.grand_total ? `\nTotal: ₱${grandTotal.toFixed(2)}` : '';
+            
+            // Check if payment redirect is needed for GCash or Maya
+            if (json.payment_redirect && json.checkout_url) {
+                const paymentMethodName = json.payment_method === 'gcash' ? 'GCash' : 
+                                         json.payment_method === 'maya' ? 'Maya' : 'Payment';
+                
+                alert(`✅ ${json.message}${totalDisplay}\n\nRedirecting to ${paymentMethodName} payment...`);
+                
+                // Redirect to PayMongo checkout in new tab
+                setTimeout(() => {
+                    window.open(json.checkout_url, '_blank');
+                    closeModal();
+                }, 1500);
+            } else {
+                alert(`✅ ${json.message}${totalDisplay}`);
+                closeModal();
+            }
         } else {
-            return 'I can help you with document requests, payment methods, processing times, and contact information. What would you like to know?';
+            alert(`❌ ${json.message || 'Unknown error occurred'}`);
         }
+
+    } catch (err) {
+        console.error('Submit error:', err);
+        alert('⚠️ Server error: ' + err.message);
+    } finally {
+        btn.textContent = orig;
+        btn.disabled = false;
     }
 }
 
-// Initialize Welcome Message
-function initializeWelcomeMessage() {
-    const welcomeDate = document.getElementById('welcomeDate');
-    const welcomeName = document.getElementById('welcomeName');
-    const studentName = document.getElementById('studentName');
-    const accountName = document.getElementById('accountName');
-
-    // Set current date
-    if (welcomeDate) {
-        const today = new Date();
-        const options = { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        };
-        welcomeDate.textContent = today.toLocaleDateString('en-US', options);
-    }
-
-    // Set student name (in a real app, this would come from user session)
-    const defaultName = 'John Doe';
-    if (welcomeName) welcomeName.textContent = defaultName;
-    if (studentName) studentName.textContent = defaultName;
-    if (accountName) accountName.textContent = defaultName;
+/* ----------------- Navigation ----------------- */
+function setupNavigation() {
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const target = document.getElementById(link.dataset.page);
+            target?.classList.add('active');
+        });
+    });
 }
 
-// Utility Functions
-function formatCurrency(amount) {
-    return '₱ ' + amount.toFixed(2);
-}
-
-function generateRequestNumber() {
-    return 'REQ-' + Date.now().toString().slice(-6);
-}
-
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-function validatePhone(phone) {
-    const re = /^[\+]?[1-9][\d]{0,15}$/;
-    return re.test(phone.replace(/\s/g, ''));
-}
-
-// Export functions for testing (if using modules)
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        initializeDocumentRequestSystem,
-        validateForm,
-        collectFormData,
-        updateTotal,
-        formatCurrency,
-        validateEmail,
-        validatePhone
-    };
+/* ----------------- Mobile Menu ----------------- */
+function setupMobileMenu() {
+    const menu = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    if (!menu || !sidebar) return;
+    menu.addEventListener('click', () => sidebar.classList.toggle('mobile-open'));
 }
