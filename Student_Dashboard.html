@@ -33,7 +33,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link active" data-page="documents">
+          <a href="#" class="nav-link" data-page="documents">
             <i class="fas fa-file-alt"></i> Documents
           </a>
         </li>
@@ -62,7 +62,7 @@
           <button class="action-btn menu-toggle" id="menuToggle">
             <i class="fas fa-bars"></i>
           </button>
-          <h1 class="header-title" id="pageTitle">Documents</h1>
+          <h1 class="header-title" id="pageTitle">Dashboard</h1>
         </div>
         <div class="header-actions">
           <button class="action-btn" title="Notifications">
@@ -72,7 +72,7 @@
       </header>
 
       <!-- Dashboard Page -->
-      <div class="page" id="dashboard">
+      <div class="page active" id="dashboard">
         <div class="page-content">
           <div class="welcome-card">
             <div class="welcome-date" id="welcomeDate"></div>
@@ -100,7 +100,7 @@
       </div>
 
       <!-- Documents Page -->
-      <div class="page active" id="documents">
+      <div class="page" id="documents">
         <div class="page-content">
           <h2 style="margin-bottom: 20px; color: #000000;">Available Documents</h2>
 
@@ -143,139 +143,11 @@
       <div class="page" id="request-history">
         <div class="page-content">
           <h2 style="margin-bottom: 20px; color: #000000;">Request History</h2>
-          <div class="table-container">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Request No.</th>
-                  <th>Request Document</th>
-                  <th>Payment Method</th>
-                  <th>Date Requested</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td><span class="status-pending"></span></td>
-                </tr>
-              </tbody>
-            </table>
+          <div id="request-history-content">
+            <div class="loading-message">Loading request history...</div>
           </div>
         </div>
       </div>
-
-      <div class="modal-overlay" id="requestDetailsModal">
-  <div class="modal-content request-details-modal">
-    <div class="modal-header">
-      <h2>Request Details</h2>
-      <button class="close-modal" id="closeRequestDetailsBtn">×</button>
-    </div>
-    <div class="request-details-content">
-      <!-- Request Information Section -->
-      <div class="details-section">
-        <h3>Request Information</h3>
-        <div class="details-grid">
-          <div class="detail-item">
-            <label>Request Number:</label>
-            <span id="detailRequestNo">-</span>
-          </div>
-          <div class="detail-item">
-            <label>Date Requested:</label>
-            <span id="detailDateRequested">-</span>
-          </div>
-          <div class="detail-item">
-            <label>Status:</label>
-            <span id="detailStatus" class="status-badge">-</span>
-          </div>
-          <div class="detail-item">
-            <label>Payment Method:</label>
-            <span id="detailPaymentMethod">-</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Student Information Section -->
-      <div class="details-section">
-        <h3>Student Information</h3>
-        <div class="details-grid">
-          <div class="detail-item">
-            <label>Student Number:</label>
-            <span id="detailStudentNumber">-</span>
-          </div>
-          <div class="detail-item">
-            <label>Full Name:</label>
-            <span id="detailFullName">-</span>
-          </div>
-          <div class="detail-item">
-            <label>Grade & Section:</label>
-            <span id="detailGradeSection">-</span>
-          </div>
-          <div class="detail-item">
-            <label>Email:</label>
-            <span id="detailEmail">-</span>
-          </div>
-          <div class="detail-item">
-            <label>Contact Number:</label>
-            <span id="detailContact">-</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Requested Documents Section -->
-      <div class="details-section">
-        <h3>Requested Documents</h3>
-        <div class="documents-table-container">
-          <table class="documents-detail-table">
-            <thead>
-              <tr>
-                <th>Document</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Subtotal</th>
-              </tr>
-            </thead>
-            <tbody id="detailDocumentsTable">
-              <!-- Document rows will be inserted here -->
-            </tbody>
-          </table>
-        </div>
-        <div class="total-amount-section">
-          <div class="total-row">
-            <span class="total-label">Total Amount:</span>
-            <span class="total-value" id="detailTotalAmount">₱ 0.00</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Status Timeline Section -->
-      <div class="details-section">
-        <h3>Status Timeline</h3>
-        <div class="timeline" id="statusTimeline">
-          <!-- Timeline items will be inserted here -->
-        </div>
-      </div>
-
-      <!-- Actions Section -->
-      <div class="details-section">
-        <div class="request-actions">
-          <button class="action-button cancel-btn" id="cancelRequestBtn">
-            <i class="fas fa-times"></i> Cancel Request
-          </button>
-          <button class="action-button download-btn" id="downloadReceiptBtn">
-            <i class="fas fa-download"></i> Download Receipt
-          </button>
-          <button class="action-button contact-btn" id="contactSupportBtn">
-            <i class="fas fa-phone"></i> Contact Support
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
       <!-- Account Page -->
       <div class="page" id="account">
@@ -371,122 +243,121 @@
 
           <!-- Documents Available Section -->
           <div class="document-item">
-  <div class="document-info">
-    <input type="checkbox" class="document-checkbox" id="regForm" data-id="1" data-price="50">
-    <label for="regForm" class="document-name">Registration Form</label>
-  </div>
-  <div class="document-price">₱ 50.00</div>
-  <div class="quantity-controls">
-    <button type="button" class="quantity-btn" onclick="changeQuantity('regForm', -1)">−</button>
-    <input type="number" class="quantity-input" id="regForm-qty" value="0" min="0" readonly>
-    <button type="button" class="quantity-btn" onclick="changeQuantity('regForm', 1)">+</button>
-  </div>
-  <div class="dropdown-controls">
-    <select id="regForm-assessment">
-      <option>--Select--</option>
-      <option>2024</option>
-      <option>2023</option>
-      <option>2022</option>
-    </select>
-    <select id="regForm-semester">
-      <option>--Select--</option>
-      <option>1st Semester</option>
-      <option>2nd Semester</option>
-    </select>
-  </div>
-</div>
-
-<div class="document-item">
-  <div class="document-info">
-    <input type="checkbox" class="document-checkbox" id="cog" data-id="2" data-price="50">
-    <label for="cog" class="document-name">Certificate of Grades</label>
-  </div>
-  <div class="document-price">₱ 50.00</div>
-  <div class="quantity-controls">
-    <button type="button" class="quantity-btn" onclick="changeQuantity('cog', -1)">−</button>
-    <input type="number" class="quantity-input" id="cog-qty" value="0" min="0" readonly>
-    <button type="button" class="quantity-btn" onclick="changeQuantity('cog', 1)">+</button>
-  </div>
-</div>
-
-<div class="document-item">
-  <div class="document-info">
-    <input type="checkbox" class="document-checkbox" id="coe" data-id="3" data-price="50">
-    <label for="coe" class="document-name">Certificate of Enrollment</label>
-  </div>
-  <div class="document-price">₱ 50.00</div>
-  <div class="quantity-controls">
-    <button type="button" class="quantity-btn" onclick="changeQuantity('coe', -1)">−</button>
-    <input type="number" class="quantity-input" id="coe-qty" value="0" min="0" readonly>
-    <button type="button" class="quantity-btn" onclick="changeQuantity('coe', 1)">+</button>
-  </div>
-  <div class="dropdown-controls">
-    <select id="coe-assessment">
-      <option>--Select--</option>
-      <option>2024</option>
-      <option>2023</option>
-      <option>2022</option>
-    </select>
-    <select id="coe-semester">
-      <option>--Select--</option>
-      <option>1st Semester</option>
-      <option>2nd Semester</option>
-    </select>
-  </div>
-</div>
-
-<div class="document-item">
-  <div class="document-info">
-    <input type="checkbox" class="document-checkbox" id="tor" data-id="4" data-price="200">
-    <label for="tor" class="document-name">Transcript of Records</label>
-  </div>
-  <div class="document-price">₱ 200.00</div>
-  <div class="quantity-controls">
-    <button type="button" class="quantity-btn" onclick="changeQuantity('tor', -1)">−</button>
-    <input type="number" class="quantity-input" id="tor-qty" value="0" min="0" readonly>
-    <button type="button" class="quantity-btn" onclick="changeQuantity('tor', 1)">+</button>
-  </div>
-</div>
-
-<div class="document-item">
-  <div class="document-info">
-    <input type="checkbox" class="document-checkbox" id="gmc" data-id="5" data-price="150">
-    <label for="gmc" class="document-name">Good Moral Certificate</label>
-  </div>
-  <div class="document-price">₱ 150.00</div>
-  <div class="quantity-controls">
-    <button type="button" class="quantity-btn" onclick="changeQuantity('gmc', -1)">−</button>
-    <input type="number" class="quantity-input" id="gmc-qty" value="0" min="0" readonly>
-    <button type="button" class="quantity-btn" onclick="changeQuantity('gmc', 1)">+</button>
-  </div>
-</div>
-
-            <div class="total-section">
-              <span>Total:</span>
-              <span id="totalAmount">₱ 0.00</span>
+            <div class="document-info">
+              <input type="checkbox" class="document-checkbox" id="regForm" data-id="1" data-price="50">
+              <label for="regForm" class="document-name">Registration Form</label>
             </div>
+            <div class="document-price">₱ 50.00</div>
+            <div class="quantity-controls">
+              <button type="button" class="quantity-btn" onclick="changeQuantity('regForm', -1)">−</button>
+              <input type="number" class="quantity-input" id="regForm-qty" value="0" min="0" readonly>
+              <button type="button" class="quantity-btn" onclick="changeQuantity('regForm', 1)">+</button>
+            </div>
+            <div class="dropdown-controls">
+              <select id="regForm-assessment">
+                <option>--Select--</option>
+                <option>2024</option>
+                <option>2023</option>
+                <option>2022</option>
+              </select>
+              <select id="regForm-semester">
+                <option>--Select--</option>
+                <option>1st Semester</option>
+                <option>2nd Semester</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="document-item">
+            <div class="document-info">
+              <input type="checkbox" class="document-checkbox" id="cog" data-id="2" data-price="50">
+              <label for="cog" class="document-name">Certificate of Grades</label>
+            </div>
+            <div class="document-price">₱ 50.00</div>
+            <div class="quantity-controls">
+              <button type="button" class="quantity-btn" onclick="changeQuantity('cog', -1)">−</button>
+              <input type="number" class="quantity-input" id="cog-qty" value="0" min="0" readonly>
+              <button type="button" class="quantity-btn" onclick="changeQuantity('cog', 1)">+</button>
+            </div>
+          </div>
+
+          <div class="document-item">
+            <div class="document-info">
+              <input type="checkbox" class="document-checkbox" id="coe" data-id="3" data-price="50">
+              <label for="coe" class="document-name">Certificate of Enrollment</label>
+            </div>
+            <div class="document-price">₱ 50.00</div>
+            <div class="quantity-controls">
+              <button type="button" class="quantity-btn" onclick="changeQuantity('coe', -1)">−</button>
+              <input type="number" class="quantity-input" id="coe-qty" value="0" min="0" readonly>
+              <button type="button" class="quantity-btn" onclick="changeQuantity('coe', 1)">+</button>
+            </div>
+            <div class="dropdown-controls">
+              <select id="coe-assessment">
+                <option>--Select--</option>
+                <option>2024</option>
+                <option>2023</option>
+                <option>2022</option>
+              </select>
+              <select id="coe-semester">
+                <option>--Select--</option>
+                <option>1st Semester</option>
+                <option>2nd Semester</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="document-item">
+            <div class="document-info">
+              <input type="checkbox" class="document-checkbox" id="tor" data-id="4" data-price="200">
+              <label for="tor" class="document-name">Transcript of Records</label>
+            </div>
+            <div class="document-price">₱ 200.00</div>
+            <div class="quantity-controls">
+              <button type="button" class="quantity-btn" onclick="changeQuantity('tor', -1)">−</button>
+              <input type="number" class="quantity-input" id="tor-qty" value="0" min="0" readonly>
+              <button type="button" class="quantity-btn" onclick="changeQuantity('tor', 1)">+</button>
+            </div>
+          </div>
+
+          <div class="document-item">
+            <div class="document-info">
+              <input type="checkbox" class="document-checkbox" id="gmc" data-id="5" data-price="150">
+              <label for="gmc" class="document-name">Good Moral Certificate</label>
+            </div>
+            <div class="document-price">₱ 150.00</div>
+            <div class="quantity-controls">
+              <button type="button" class="quantity-btn" onclick="changeQuantity('gmc', -1)">−</button>
+              <input type="number" class="quantity-input" id="gmc-qty" value="0" min="0" readonly>
+              <button type="button" class="quantity-btn" onclick="changeQuantity('gmc', 1)">+</button>
+            </div>
+          </div>
+
+          <div class="total-section">
+            <span>Total:</span>
+            <span id="totalAmount">₱ 0.00</span>
           </div>
 
           <!-- Payment Method Section -->
           <div class="form-section">
-    <h3>Payment Method</h3>
-    <div class="payment-options">
-        <div class="payment-option">
-            <input type="radio" id="cash" name="payment" value="cash" required>
-            <label for="cash">Cash</label>
-        </div>
-        <div class="payment-option">
-            <input type="radio" id="gcash" name="payment" value="gcash">
-            <label for="gcash">
-                <span style="color: #0066cc; font-weight: bold;">G</span>Cash
-            </label>
-        </div>
-        <div class="payment-option">
-            <input type="radio" id="maya" name="payment" value="maya">
-            <label for="maya" style="color: #4dbd03c1; font-weight: bold;">maya</label>
-        </div>
-    </div>
-</div>
+            <h3>Payment Method</h3>
+            <div class="payment-options">
+              <div class="payment-option">
+                <input type="radio" id="cash" name="payment" value="cash" required>
+                <label for="cash">Cash</label>
+              </div>
+              <div class="payment-option">
+                <input type="radio" id="gcash" name="payment" value="gcash">
+                <label for="gcash">
+                  <span style="color: #0066cc; font-weight: bold;">G</span>Cash
+                </label>
+              </div>
+              <div class="payment-option">
+                <input type="radio" id="maya" name="payment" value="maya">
+                <label for="maya" style="color: #4dbd03c1; font-weight: bold;">maya</label>
+              </div>
+            </div>
+          </div>
 
           <button type="submit" class="submit-btn">Submit Request</button>
         </form>

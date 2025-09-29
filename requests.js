@@ -267,6 +267,142 @@ async function submitForm(data) {
     }
 }
 
+// Add this function to your request.js file
+
+/**
+ * Send SMS notification to student after document request
+ * @param {string} phoneNumber - Student's contact number
+ * @param {string} studentName - Student's first name
+ * @param {number} requestId - Document request ID
+ * @param {number} totalAmount - Total amount
+ * @param {string} paymentMethod - Payment method used
+ * @param {string} scheduledPickup - Scheduled pickup date
+ */
+async function sendSMSNotification(phoneNumber, studentName, requestId, totalAmount, paymentMethod, scheduledPickup) {
+    try {
+        // Create the SMS message
+        const smsMessage = `Hello ${studentName}! Your document request #${requestId} has been received. ` +
+                          `Total amount: ₱${totalAmount}. ` +
+                          `Payment method: ${paymentMethod}. ` +
+                          `Scheduled pickup: ${scheduledPickup}. Thank you!`;
+
+        // Prepare SMS data
+        const smsData = {
+            phoneNumber: phoneNumber,
+            message: smsMessage,
+            senderName: 'PCSchool'
+        };
+
+        console.log('📱 Attempting to send SMS to:', phoneNumber);
+        console.log('💬 Message:', smsMessage);
+
+        // Send SMS (fire and forget - don't await)
+        fetch('/sms_sender.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(smsData)
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                console.log('✅ SMS sent successfully!', result);
+            } else {
+                console.warn('⚠️ SMS sending failed:', result.message);
+            }
+        })
+        .catch(error => {
+            console.error('❌ SMS error:', error);
+        });
+
+    } catch (error) {
+        console.error('❌ Error preparing SMS:', error);
+    }
+}
+
+// Update your existing submitDocumentRequest function in request.js:
+async function submitDocumentRequest(studentInfo, selectedDocs, paymentMethod) {
+    try {
+        // Show loading state
+        showLoading('Submitting your document request...');
+
+        const requestData = {
+            studentInfo: studentInfo,
+            selectedDocs: selectedDocs,
+            paymentMethod: paymentMethod
+        };
+
+        const response = await fetch('/document_request.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            // Show success message immediately
+            showNotification('✅ ' + result.message, 'success');
+            
+            // Send SMS in background using the student's contact number
+            sendSMSNotification(
+                result.student_contact_no, // Phone number from response
+                result.student_firstname,  // First name from response
+                result.request_id,         // Request ID from response
+                result.grand_total,        // Total amount from response
+                result.payment_method,     // Payment method from response
+                result.scheduled_pickup    // Pickup date from response
+            );
+
+            // Handle payment redirect or success page
+            if (result.payment_redirect && result.payment_url) {
+                setTimeout(() => {
+                    window.location.href = result.payment_url;
+                }, 1500);
+            } else {
+                setTimeout(() => {
+                    window.location.href = `/request-success.html?request_id=${result.request_id}`;
+                }, 2000);
+            }
+        } else {
+            showNotification('❌ ' + result.message, 'error');
+        }
+    } catch (error) {
+        console.error('Error submitting document request:', error);
+        showNotification('❌ An error occurred while submitting your request. Please try again.', 'error');
+    } finally {
+        hideLoading();
+    }
+}
+
+// You can also use this function independently elsewhere in your app
+async function sendCustomSMS(phoneNumber, message) {
+    try {
+        const smsData = {
+            phoneNumber: phoneNumber,
+            message: message,
+            senderName: 'PCSchool'
+        };
+
+        const response = await fetch('/sms_sender.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(smsData)
+        });
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error sending custom SMS:', error);
+        return { success: false, message: error.message };
+    }
+}
+
 /* ----------------- Navigation ----------------- */
 function setupNavigation() {
     document.querySelectorAll('.nav-link').forEach(link => {
